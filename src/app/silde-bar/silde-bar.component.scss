@@ -1,0 +1,40 @@
+.main{
+  background-color: #333d47;
+  color: #dbdbdb;
+  border:1px #3d4851 solid;
+  padding-top:30px;
+  height:100%;
+  width:100%;
+  display: block;
+}
+
+.main{
+  ul{
+    padding:0;
+    margin:0;
+  }
+  ul li{
+    padding:5px 40px;
+    list-style: none;
+    width:100%;
+    display: block;
+
+    & span:first-child{
+      margin:0 5px;
+    }
+  }
+
+  ul>li:hover, .active{
+    background-color: #1f252f;
+    color:#fff;
+}
+
+  ul > li ul{
+    color: #c6c6c6;
+  }
+}
+
+.secondary-up, .secondary-down{
+  float:right;
+  right:20px;
+}

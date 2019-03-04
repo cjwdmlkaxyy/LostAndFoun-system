@@ -1,0 +1,24 @@
+<nav class="nav navbar-default">
+    <div class="navbar-fixed-top">
+      <div class="navbar-brand">
+        <img src="http://temp.im/100x50"/>
+      </div>
+      <div class="right">
+        <ul class="nav navbar-nav">
+          <li><span class="glyphicon glyphicon-heart"></span><span>返回官网</span></li>
+          <li><span class="glyphicon glyphicon-user"></span><span>Admin</span></li>
+          <li><span class="glyphicon glyphicon-off"></span><span routerLink="../Login">退出登录</span></li>
+          <li><span>{{realTime | date:'yyyy-MM-dd HH:mm:ss'}}</span></li>
+        </ul>
+      </div>
+    </div>
+</nav>
+<div class="main row" style="padding-top:50px;height:100%;">
+  <div class="col-md-2" style="padding:0;height:100%;">
+    <app-silde-bar></app-silde-bar>
+  </div>
+  <div class="col-md-10" style="padding-right:initial;height:100%;">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

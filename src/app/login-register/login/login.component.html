@@ -1,0 +1,27 @@
+<div class="bgSet">
+  <div>
+    <ul class="bg-bubbles">
+      <li *ngFor="let i of bubbles"></li>
+    </ul>
+  </div>
+  <div class="main">
+    <div class="title text-center">
+      <span>欢迎登陆</span>
+    </div>
+    <div class="form-login">
+      <form (ngSubmit)="login()">
+        <div class="row">
+          <input type="text" class="form-control" autocomplete="off" name="userName"
+                 [(ngModel)]="username">
+        </div>
+        <div class="row">
+          <input type="password" class="form-control" autocomplete="off" name="password"
+                 [(ngModel)]="password">
+        </div>
+        <div class="row">
+          <input type="submit" class="form-control" value="登陆">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
