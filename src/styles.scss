@@ -1,9 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+@media screen and (max-width:1500px){
+  html{
+    font-size:8px !important;
+  }
+}
+html{
+  font-size:10px;
+}
 body{
   width:100vw;
   height:100vh;
   margin:0;
   padding:0;
+  min-width:1200px;
+  font-size: 1rem;
+  //font-size:15px;
 }
 
 .right{
@@ -19,4 +30,7 @@ body{
   margin:0;
   padding:0;
   width:100%;
+}
+.inline-block{
+  display: inline-block;
 }

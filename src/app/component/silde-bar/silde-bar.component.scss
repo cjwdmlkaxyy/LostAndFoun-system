@@ -1,0 +1,54 @@
+.main{
+  background-color: #333d47;
+  color: #dbdbdb;
+  border:1px #3d4851 solid;
+  padding-top:30px;
+  height:100%;
+  width:100%;
+  display: block;
+}
+
+.main{
+  ul{
+    padding:0;
+    margin:0;
+  }
+  ul li{
+    //padding:5px 40px;
+    list-style: none;
+    width:100%;
+    display: block;
+
+    & span:first-child{
+      margin:0 5px;
+    }
+  }
+
+  ul>li:hover, .active{
+    background-color: #1f252f;
+    color:#fff;
+}
+
+  ul > li ul{
+    color: #c6c6c6;
+  }
+}
+
+.secondary-position{
+  float:right;
+  right:20px;
+}
+
+/*ant menu*/
+.ant-menu-dark, .ant-menu-dark .ant-menu-sub {
+  color: rgba(255, 255, 255, 0.65) !important;
+  background: #333d47 !important;
+}
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+  background-color: #74c7b5 !important;
+}
+ul[_ngcontent-c2] > li[_ngcontent-c2]:hover, .main[_ngcontent-c2] .active[_ngcontent-c2] {
+  background-color: #1f252f;
+  color: #fff;
+}
+

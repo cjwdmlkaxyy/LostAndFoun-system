@@ -8,13 +8,10 @@ import * as $ from 'jquery';
 })
 export class SildeBarComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-
-    /*$('ul li:has(ul)', function () {
-      console.log(this);
-    });*/
   }
 
 }
