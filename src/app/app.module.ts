@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NgxEchartsModule } from 'ngx-echarts';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
+import { SlideshowComponent } from './component/pictureManagement/slideshow/slideshow.component';
+import { PagePictureComponent } from './component/pictureManagement/page-picture/page-picture.component';
 
 registerLocaleData(zh);
 
@@ -35,7 +39,9 @@ registerLocaleData(zh);
     RegisterComponent,
     FrameComponent,
     HomeComponent,
-    WholePageListenDirective
+    WholePageListenDirective,
+    SlideshowComponent,
+    PagePictureComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +50,7 @@ registerLocaleData(zh);
     NgZorroAntdModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxEchartsModule
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
