@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-slideshow',
@@ -7,6 +7,10 @@ import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
   styleUrls: ['./slideshow.component.scss']
 })
 export class SlideshowComponent implements OnInit {
+
+  endIndex: number;
+  startIndex: number;
+  lineHeight: number;
 
   listOfData = [
     {
@@ -26,30 +30,71 @@ export class SlideshowComponent implements OnInit {
       name   : 'Joe Black',
       age    : 32,
       address: 'Sidney No. 1 Lake Park'
+    },
+    {
+      key    : '4',
+      name   : '4',
+      age    : 32,
+      address: 'Sidney No. 1 Lake Park'
+    },
+    {
+      key    : '5',
+      name   : '5',
+      age    : 32,
+      address: 'Sidney No. 1 Lake Park'
+    },
+    {
+      key    : '6',
+      name   : '6',
+      age    : 32,
+      address: 'Sidney No. 1 Lake Park'
     }
   ];
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
-  // drop(event: CdkDragDrop<string[]>): void {
-  //   moveItemInArray(this.listOfData, event.previousIndex, event.currentIndex);
-  //   console.log(2222222);
-  // }
-  allowDrop(e) {
-    e.preventDefault();
-  }
-  drag(e) {
-    e.dataTransfer.setData('application/x-moz-node', e.target);
+  /*drag:拖动
+  * start drag
+  * */
+  drag(e, index) {
+    this.startIndex = index;
+    // console.log(this.startIndex + '     start drag');
+    e.dataTransfer.setData('text', index);
   }
 
+  /*
+  * dragging
+  * */
   drop(e, index) {
-    console.log(index);
+    console.log(e);
     e.preventDefault();
-    let data = e.dataTransfer.getData('application/x-moz-node');
-    // e.target.appendChild();
+    let data = e.dataTransfer.getData('text');
+    let nodes = $('tbody tr')[this.endIndex];
+    let currentNode = $('tbody tr')[data];
+    let height = e.layerY - e.offsetY;
+    console.log(height);
+    console.log(currentNode);
+
+    if (this.startIndex > this.endIndex) {
+      nodes.before(currentNode);
+      console.log('before');
+    } else {
+      nodes.after(currentNode);
+      console.log('after');
+    }
+
+  }
+  /*
+  * end drag
+  * */
+  allowDrop(e, index) {
+    this.endIndex = index;
+    // console.log(this.endIndex + '    is allowDrop?????');
+    e.preventDefault();
   }
 
 }
