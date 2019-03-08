@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import * as $ from 'jquery';
 
 @Component({
@@ -11,6 +12,7 @@ export class SlideshowComponent implements OnInit {
   endIndex: number;
   startIndex: number;
   lineHeight: number;
+  imgSrc: any;
 
   listOfData = [
     {
@@ -51,10 +53,10 @@ export class SlideshowComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private sanizter: DomSanitizer) { }
 
   ngOnInit() {
-
+    this.imgSrc == null;
   }
 
   /*drag:拖动
@@ -97,4 +99,46 @@ export class SlideshowComponent implements OnInit {
     e.preventDefault();
   }
 
+  /*
+  * upload picture
+  * */
+  uploadImg() {
+    $('#uploadPicture').click();
+  }
+
+  upload(e) {
+    console.log(e);
+    let src = e.srcElement.files[0];
+    console.log(src);
+    let test11 = window.URL.createObjectURL(src);
+    console.log(test11);
+    this.imgSrc = this.sanizter.bypassSecurityTrustUrl(test11);
+    console.log(this.imgSrc);
+
+    // console.log($('#uploadPicture').val() + '     ' + this.imgSrc);
+    // console.log(window.URL.createObjectURL(this.imgSrc));
+  }
+
+  /*
+  * add data
+  * */
+  add() {
+    if (this.listOfData.length > 10) {
+      // return ;
+    }
+    this.listOfData.push({
+      key    : '',
+      name   : '',
+      age    : null,
+      address: ''
+    });
+  }
+
+  /*
+  * delete item
+  * */
+  deleteItem(index) {
+    console.log(index);
+    this.listOfData.splice(index, 1);
+  }
 }

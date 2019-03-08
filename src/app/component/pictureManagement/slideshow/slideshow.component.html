@@ -5,8 +5,14 @@
     </div>
   </div>
   <div class="container">
+    <div class="row" style="padding:0 2rem 2rem;">
+      <div>
+        <button class="btn btn-success" (click)="add()"><i nz-icon [type]="'plus'"></i>新增</button>
+        <button class="btn btn-danger"><i nz-icon [type]="'close'"></i>删除</button>
+      </div>
+    </div>
     <div class="table">
-      <nz-table>
+      <nz-table [nzData]="listOfData" [nzShowPagination]="false">
         <thead>
           <tr>
             <th class="thBgColor">序列</th>
@@ -20,14 +26,22 @@
         <tr *ngFor="let data of listOfData,let idx = index"
             draggable="true" (dragstart)="drag($event,idx)"
             (dragover)="allowDrop($event,idx)" (drop)="drop($event,idx)">
-          <td>{{idx}}</td>
-          <td>{{data.name}}</td>
-          <td>{{data.age}}</td>
+          <td>{{idx+1}}</td>
           <td>
-            <input type="file" class="file">
+            <input type="text" [(ngModel)]="data.name">
           </td>
           <td>
-
+            <input type="text" [(ngModel)]="data.address"></td>
+          <td>
+            <i nz-icon [nzType]="'picture'" (click)="uploadImg()" title="上传图片"></i>
+            <input type="file" class="file" id="uploadPicture" (change)="upload($event)">
+            <img [src]="imgSrc" width="50rem" height="50rem" *ngIf="imgSrc != null">
+          </td>
+          <td>
+            <i nz-icon type="edit" theme="outline" title="编辑"></i>
+            <i nz-icon type="close" theme="outline" title="删除" (click)="deleteItem(idx)"></i>
+            <i nz-icon type="stop" theme="outline" title="禁用"></i>
+            <i nz-icon type="play-circle" theme="outline" title="启用"></i>
           </td>
         </tr>
         </tbody>

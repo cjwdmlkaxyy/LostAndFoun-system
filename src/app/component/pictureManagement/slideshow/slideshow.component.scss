@@ -8,6 +8,9 @@
 
 .main{
   padding:1rem 2rem;
+  *{
+    outline:none;
+  }
 }
 .header{
   .row{
@@ -36,4 +39,16 @@
 
 input[type=file]{
   //background-color: rgba(43, 203, 169, 0.5);
+  display: none;
+}
+
+tbody input{
+  border:0;
+  background:transparent; //设置背景色为透明色
+}
+
+tbody tr td:last-child{
+  i{
+    margin:0 0.5rem;
+  }
 }
