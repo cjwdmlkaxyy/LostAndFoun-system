@@ -12,6 +12,7 @@ export class SildeBarComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 }

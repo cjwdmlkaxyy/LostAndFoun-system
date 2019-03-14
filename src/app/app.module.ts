@@ -14,6 +14,9 @@ import { LoginComponent } from './component/login/login.component';
 import { RegisterComponent } from './component/register/register.component';
 import { FrameComponent } from './component/frame/frame.component';
 import { HomeComponent } from './component/home/home.component';
+import { SlideshowComponent } from './component/pictureManagement/slideshow/slideshow.component';
+import { PagePictureComponent } from './component/pictureManagement/page-picture/page-picture.component';
+import { PublicSourceComponent } from './component/publicSource/prompts/public-source.component';
 
 /*directive*/
 import { WholePageListenDirective } from './directive/wholePageListen.directive';
@@ -22,8 +25,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-import { SlideshowComponent } from './component/pictureManagement/slideshow/slideshow.component';
-import { PagePictureComponent } from './component/pictureManagement/page-picture/page-picture.component';
 
 registerLocaleData(zh);
 
@@ -41,7 +42,8 @@ registerLocaleData(zh);
     HomeComponent,
     WholePageListenDirective,
     SlideshowComponent,
-    PagePictureComponent
+    PagePictureComponent,
+    PublicSourceComponent
   ],
   imports: [
     BrowserModule,

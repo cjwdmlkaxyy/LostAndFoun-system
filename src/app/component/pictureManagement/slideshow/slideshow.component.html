@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="container">
-    <div class="row" style="padding:0 2rem 2rem;">
+    <div class="row">
       <div>
         <button class="btn btn-success" (click)="add()"><i nz-icon [type]="'plus'"></i>新增</button>
         <button class="btn btn-danger"><i nz-icon [type]="'close'"></i>删除</button>
@@ -15,6 +15,7 @@
       <nz-table [nzData]="listOfData" [nzShowPagination]="false">
         <thead>
           <tr>
+            <th class="thBgColor"></th>
             <th class="thBgColor">序列</th>
             <th class="thBgColor">图片地址</th>
             <th class="thBgColor">描述</th>
@@ -26,6 +27,8 @@
         <tr *ngFor="let data of listOfData,let idx = index"
             draggable="true" (dragstart)="drag($event,idx)"
             (dragover)="allowDrop($event,idx)" (drop)="drop($event,idx)">
+          <td>
+            <input type="checkbox"></td>
           <td>{{idx+1}}</td>
           <td>
             <input type="text" [(ngModel)]="data.name">
@@ -35,17 +38,20 @@
           <td>
             <i nz-icon [nzType]="'picture'" (click)="uploadImg()" title="上传图片"></i>
             <input type="file" class="file" id="uploadPicture" (change)="upload($event)">
-            <img [src]="imgSrc" width="50rem" height="50rem" *ngIf="imgSrc != null">
+            <img [src]="imgSrc" wpublicSourceidth="50rem" height="50rem" *ngIf="imgSrc != null">
           </td>
           <td>
-            <i nz-icon type="edit" theme="outline" title="编辑"></i>
-            <i nz-icon type="close" theme="outline" title="删除" (click)="deleteItem(idx)"></i>
-            <i nz-icon type="stop" theme="outline" title="禁用"></i>
-            <i nz-icon type="play-circle" theme="outline" title="启用"></i>
+            <i id="edit" nz-icon type="edit" theme="outline" title="编辑"></i>
+            <i id="delete" nz-icon type="close" theme="outline" title="删除" (click)="deleteItem(idx)"></i>
+            <i id="disable" nz-icon type="stop" theme="outline" title="禁用"></i>
+            <i id="enable" nz-icon type="play-circle" theme="outline" title="启用"></i>
           </td>
         </tr>
         </tbody>
       </nz-table>
     </div>
+  </div>
+  <div class="prompts" style="z-index:999;display: none;">
+    <app-public-source></app-public-source>
   </div>
 </div>

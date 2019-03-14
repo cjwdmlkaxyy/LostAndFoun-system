@@ -5,7 +5,7 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-slideshow',
   templateUrl: './slideshow.component.html',
-  styleUrls: ['./slideshow.component.scss']
+  styleUrls: ['./slideshow.component.scss', '../../publicSource/style/publicStyle.scss']
 })
 export class SlideshowComponent implements OnInit {
 
@@ -13,6 +13,7 @@ export class SlideshowComponent implements OnInit {
   startIndex: number;
   lineHeight: number;
   imgSrc: any;
+  isShow: boolean;
 
   listOfData = [
     {
@@ -56,7 +57,8 @@ export class SlideshowComponent implements OnInit {
   constructor(private sanizter: DomSanitizer) { }
 
   ngOnInit() {
-    this.imgSrc == null;
+    this.imgSrc = null;
+    this.isShow = false;
   }
 
   /*drag:拖动
@@ -114,24 +116,24 @@ export class SlideshowComponent implements OnInit {
     console.log(test11);
     this.imgSrc = this.sanizter.bypassSecurityTrustUrl(test11);
     console.log(this.imgSrc);
-
-    // console.log($('#uploadPicture').val() + '     ' + this.imgSrc);
-    // console.log(window.URL.createObjectURL(this.imgSrc));
   }
 
   /*
   * add data
   * */
   add() {
-    if (this.listOfData.length > 10) {
-      // return ;
+    if (this.listOfData.length > 9) {
+      this.isShow = true;
+      this.openTooltips();
+      setTimeout(this.closeTooltips, 3000);
+    } else {
+      this.listOfData.push({
+        key    : '',
+        name   : '',
+        age    : null,
+        address: ''
+      });
     }
-    this.listOfData.push({
-      key    : '',
-      name   : '',
-      age    : null,
-      address: ''
-    });
   }
 
   /*
@@ -140,5 +142,16 @@ export class SlideshowComponent implements OnInit {
   deleteItem(index) {
     console.log(index);
     this.listOfData.splice(index, 1);
+    this.closeTooltips();
+  }
+
+  /*
+  * open or close the tooltips
+  * */
+  openTooltips() {
+    $('.prompts').fadeIn(300);
+  }
+  closeTooltips() {
+    $('.prompts').fadeOut(300);
   }
 }
