@@ -54,7 +54,7 @@ registerLocaleData(zh);
     BrowserAnimationsModule,
     NgxEchartsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
