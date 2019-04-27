@@ -20,7 +20,7 @@ import { PublicSourceComponent } from './component/publicSource/prompts/public-s
 
 /*directive*/
 import { WholePageListenDirective } from './directive/wholePageListen.directive';
-import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';

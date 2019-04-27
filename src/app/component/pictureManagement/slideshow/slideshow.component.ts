@@ -65,8 +65,7 @@ export class SlideshowComponent implements OnInit {
   * start drag
   * */
   drag(e, index) {
-    this.startIndex = index;
-    // console.log(this.startIndex + '     start drag');
+    this.startIndex = e.currentTarget.id;
     e.dataTransfer.setData('text', index);
   }
 
@@ -76,28 +75,22 @@ export class SlideshowComponent implements OnInit {
   drop(e, index) {
     console.log(e);
     e.preventDefault();
-    let data = e.dataTransfer.getData('text');
-    let nodes = $('tbody tr')[this.endIndex];
-    let currentNode = $('tbody tr')[data];
-    let height = e.layerY - e.offsetY;
-    console.log(height);
-    console.log(currentNode);
-
+    let nodes = $('tbody tr').eq(this.endIndex);
+    let currentNode = $('tbody tr').eq(this.startIndex);
     if (this.startIndex > this.endIndex) {
       nodes.before(currentNode);
-      console.log('before');
     } else {
       nodes.after(currentNode);
-      console.log('after');
     }
-
+    for(let i=0;i<$('tbody tr').length;i++){
+      $('tbody tr').eq(i).prop('id',i);
+    }
   }
   /*
   * end drag
   * */
   allowDrop(e, index) {
-    this.endIndex = index;
-    // console.log(this.endIndex + '    is allowDrop?????');
+    this.endIndex = e.currentTarget.id;
     e.preventDefault();
   }
 

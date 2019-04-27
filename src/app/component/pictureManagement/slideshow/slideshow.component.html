@@ -25,7 +25,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let data of listOfData,let idx = index"
-            draggable="true" (dragstart)="drag($event,idx)"
+            draggable="true" (dragstart)="drag($event,idx)" [id]="idx"
             (dragover)="allowDrop($event,idx)" (drop)="drop($event,idx)">
           <td>
             <input type="checkbox"></td>

@@ -10,13 +10,17 @@
     </div>
     <div class="form-login">
       <form (ngSubmit)="login()">
-        <div class="row">
-          <input type="text" class="form-control" autocomplete="off" name="userName"
-                 [(ngModel)]="username">
+        <div class="row" *ngIf="checkLogin">
+          <i class="glyphicon glyphicon-warning-sign" style="color: orangered; margin-right: 20px"></i>
+          <span style="color: red;">用户名或密码错误</span>
         </div>
         <div class="row">
-          <input type="password" class="form-control" autocomplete="off" name="password"
-                 [(ngModel)]="password">
+          <input type="text" class="form-control" autocomplete="off" name="AccountName"
+                 [(ngModel)]="loginInfos.username">
+        </div>
+        <div class="row">
+          <input type="password" class="form-control" autocomplete="off" name="Psd"
+                 [(ngModel)]="loginInfos.password">
         </div>
         <div class="row">
           <input type="submit" class="form-control" value="登陆">
