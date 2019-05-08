@@ -6,7 +6,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UersManageMentComponent } from './component/uers-manage-ment/uers-manage-ment.component';
+import { UsersManagementComponent } from './component/users-management/users-management.component';
 import { LostSthComponent } from './component/newsManagement/lost-sth/lost-sth.component';
 import { FindSthComponent } from './component/newsManagement/find-sth/find-sth.component';
 import { SildeBarComponent } from './component/silde-bar/silde-bar.component';
@@ -17,6 +17,7 @@ import { HomeComponent } from './component/home/home.component';
 import { SlideshowComponent } from './component/pictureManagement/slideshow/slideshow.component';
 import { PagePictureComponent } from './component/pictureManagement/page-picture/page-picture.component';
 import { PublicSourceComponent } from './component/publicSource/prompts/public-source.component';
+import { LinkComponent } from "./component/linkManagement/link.component";
 
 /*directive*/
 import { WholePageListenDirective } from './directive/wholePageListen.directive';
@@ -32,7 +33,7 @@ registerLocaleData(zh);
 @NgModule({
   declarations: [
     AppComponent,
-    UersManageMentComponent,
+    UsersManagementComponent,
     LostSthComponent,
     FindSthComponent,
     SildeBarComponent,
@@ -43,7 +44,8 @@ registerLocaleData(zh);
     WholePageListenDirective,
     SlideshowComponent,
     PagePictureComponent,
-    PublicSourceComponent
+    PublicSourceComponent,
+    LinkComponent
   ],
   imports: [
     BrowserModule,

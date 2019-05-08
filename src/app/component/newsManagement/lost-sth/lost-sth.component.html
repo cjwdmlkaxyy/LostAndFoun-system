@@ -1,3 +1,62 @@
-<p>
-  lost-sth works!
-</p>
+<div class="main">
+  <div class="header">
+    <div class="row">
+      <span>当前位置:</span><span>后台管理系统</span>&gt;<span>失物信息管理</span>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div>
+        <button class="btn btn-success" (click)="add()"><i nz-icon [type]="'plus'"></i>新增</button>
+        <button class="btn btn-danger"><i nz-icon [type]="'close'"></i>批量删除</button>
+        <button class="btn btn-warning" style="float: right;"><i nz-icon [type]="'search'"></i>查询</button>
+      </div>
+    </div>
+    <div class="table">
+      <nz-table [nzData]="listOfData" [nzShowPagination]="false">
+        <thead>
+        <tr>
+          <th class="thBgColor"></th>
+          <th class="thBgColor">序列</th>
+          <th class="thBgColor">登陆账号</th>
+          <th class="thBgColor">发布时间</th>
+          <th class="thBgColor">物品类型</th>
+          <th class="thBgColor">丢失地点</th>
+          <th class="thBgColor">联系电话</th>
+          <th class="thBgColor">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of listOfData,let idx = index"
+            draggable="true" (dragstart)="drag($event,idx)" [id]="idx"
+            (dragover)="allowDrop($event,idx)" (drop)="drop($event,idx)">
+          <td>
+            <input type="checkbox"></td>
+          <td>{{idx+1}}</td>
+          <td>
+            <!--<input type="text" [(ngModel)]="data.name">-->
+            <span>dddddd</span>
+          </td>
+          <td>
+            <span>dddddddddd</span>
+          <td>
+            <span>dddddddddd</span>
+          </td>
+          <td>
+            <span>dddddddddd</span>
+          <td>
+            <span>dddddddddd</span>
+          </td>
+          <td>
+            <i id="edit" nz-icon type="edit" theme="outline" title="编辑"></i>
+            <i id="delete" nz-icon type="close" theme="outline" title="删除" (click)="deleteItem(idx)"></i>
+          </td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+  <div class="prompts" style="z-index:999;display: none;">
+    <app-public-source></app-public-source>
+  </div>
+</div>

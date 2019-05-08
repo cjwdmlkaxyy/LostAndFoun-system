@@ -19,10 +19,11 @@
   .inline-block{
     background-color: #00344a;
     padding:1rem 0.5rem;
-    width:25rem;
-    margin:0 2rem;
+    //width:25rem;
+    //margin:0 2rem;
     color:#fff;
     border-radius:0.5rem;
+    cursor: pointer;
     & div:first-child{
       font-size:1.2rem;
       text-align: left !important;
@@ -51,4 +52,12 @@
 
 .times{
   font-size:1.2rem !important;
+}
+.col-md-3{
+  width: 23%;
+}
+
+.inline-block:hover{
+  box-shadow: 0 0 3px #008ba7;
+  //border:1px red solid;
 }

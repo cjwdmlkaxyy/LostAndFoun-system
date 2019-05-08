@@ -37,3 +37,20 @@ body{
 .inline-block{
   display: inline-block;
 }
+
+/********public style************/
+i{
+  cursor: pointer;
+}
+i[id=edit]:hover{
+  color: #3cbcaf;
+}
+i[id=delete]:hover{
+  color: #bc210d;
+}
+i[id=disable]:hover{
+  color: #bc4b4c;
+}
+id[id=enable]:hover{
+  color: #58bc2e;
+}

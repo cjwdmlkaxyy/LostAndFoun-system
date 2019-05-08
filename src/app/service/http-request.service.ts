@@ -9,8 +9,8 @@ import { Observable } from 'rxjs';
 export class HttpRequestService{
     constructor(private http: HttpClient){}
 
-    // urlFont = 'http://47.102.139.16:8083';
-    urlFont = 'http://192.168.2.57:8083';
+    urlFont = 'http://47.102.139.16:8083';
+    // urlFont = 'http://192.168.2.57:8083';
 
     /*
     * login

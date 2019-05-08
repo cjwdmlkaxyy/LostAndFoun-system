@@ -1,14 +1,15 @@
 <div class="main">
   <div class="header">
     <div class="row">
-      <span>当前位置:</span><span>后台管理系统</span>&gt;<span>图片管理</span>&gt;<span>图片管理</span>
+      <span>当前位置:</span><span>后台管理系统</span>&gt;<span>友情链接</span>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div>
         <button class="btn btn-success" (click)="add()"><i nz-icon [type]="'plus'"></i>新增</button>
-        <button class="btn btn-danger"><i nz-icon [type]="'close'"></i>删除</button>
+        <button class="btn btn-danger"><i nz-icon [type]="'close'"></i>批量删除</button>
+        <button class="btn btn-warning" style="float: right;"><i nz-icon [type]="'search'"></i>查询</button>
       </div>
     </div>
     <div class="table">
@@ -17,9 +18,9 @@
         <tr>
           <th class="thBgColor"></th>
           <th class="thBgColor">序列</th>
-          <th class="thBgColor">图片地址</th>
+          <th class="thBgColor">名称</th>
+          <th class="thBgColor">链接</th>
           <th class="thBgColor">描述</th>
-          <th class="thBgColor">上传图片</th>
           <th class="thBgColor">操作</th>
         </tr>
         </thead>
@@ -31,20 +32,17 @@
             <input type="checkbox"></td>
           <td>{{idx+1}}</td>
           <td>
-            <input type="text" [(ngModel)]="data.name">
+            <!--<input type="text" [(ngModel)]="data.name">-->
+            <span>dddddd</span>
           </td>
           <td>
-            <input type="text" [(ngModel)]="data.address"></td>
+            <span>dddddddddd</span>
           <td>
-            <i nz-icon [nzType]="'picture'" (click)="uploadImg()" title="上传图片"></i>
-            <input type="file" class="file" id="uploadPicture" (change)="upload($event)">
-            <img [src]="imgSrc" wpublicSourceidth="50rem" height="50rem" *ngIf="imgSrc != null">
+            <span>dddddddddd</span>
           </td>
           <td>
             <i id="edit" nz-icon type="edit" theme="outline" title="编辑"></i>
             <i id="delete" nz-icon type="close" theme="outline" title="删除" (click)="deleteItem(idx)"></i>
-            <i id="disable" nz-icon type="stop" theme="outline" title="禁用"></i>
-            <i id="enable" nz-icon type="play-circle" theme="outline" title="启用"></i>
           </td>
         </tr>
         </tbody>

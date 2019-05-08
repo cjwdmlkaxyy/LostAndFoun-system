@@ -10,30 +10,30 @@
     </div>
   </div>
   <div class="display-data">
-    <div class="row">
-      <div class="inline-block">
+    <div class="row" style="display: flex;justify-content: space-between;">
+      <div class="col-md-3 inline-block">
         <div><span>今日访客量</span></div>
         <div><span>{{dashboardDate.todayVisit}}</span><span class="times">（人次）</span></div>
         <div><span>点击查看数据</span></div>
       </div>
-      <div class="inline-block">
+      <div class="col-md-3 inline-block">
         <div><span>本月访客量</span></div>
         <div><span>{{dashboardDate.todayVisit}}</span><span class="times">（人次）</span></div>
         <div><span>点击查看数据</span></div>
       </div>
-      <div class="inline-block">
+      <div class="col-md-3 inline-block">
         <div><span>今日活跃用户</span></div>
         <div><span>{{dashboardDate.todayActive}}</span><span class="times">（人次）</span></div>
         <div><span>点击查看数据</span></div>
       </div>
-      <div class="inline-block">
+      <div class="col-md-3 inline-block">
         <div><span>本月活跃用户</span></div>
         <div><span>{{dashboardDate.monthActive}}</span><span class="times">（人次）</span></div>
         <div><span>点击查看数据</span></div>
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="row">
     <div echarts [options]="options" style="height:45rem;width:100%;margin-top:5rem;"></div>
   </div>
 </div>
