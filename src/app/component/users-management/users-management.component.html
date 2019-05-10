@@ -9,7 +9,8 @@
       <div>
         <!--<button class="btn btn-success" (click)="add()"><i nz-icon [type]="'plus'"></i>新增</button>-->
         <button class="btn btn-danger"><i nz-icon [type]="'close'"></i>批量删除</button>
-        <button class="btn btn-warning" style="float: right;"><i nz-icon [type]="'search'"></i>查询</button>
+        <button class="btn btn-warning" style="float: right;"
+                (click)="openSearchLayer()"><i nz-icon [type]="'search'"></i>查询</button>
       </div>
     </div>
     <div class="table">
@@ -51,3 +52,23 @@
     <app-public-source></app-public-source>
   </div>
 </div>
+<!--搜素-->
+<nz-modal
+  [nzClassName]="'vertical-center-modal'"
+  nzTitle="查询"
+  [nzVisible]="searchLayer"
+  (nzOnOk)="closeSearch()"
+  (nzOnCancel)="closeSearch()"
+  nzMaskClosable="false"
+>
+  <form nz-form [formGroup]="test">
+    <nz-form-item>
+      <nz-form-label>Name</nz-form-label>
+      <nz-form-control>
+        <input formControlName="firstName" type="text" placeholder="Please input your name" />
+        <nz-form-explain>Please input your name</nz-form-explain
+        >
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>

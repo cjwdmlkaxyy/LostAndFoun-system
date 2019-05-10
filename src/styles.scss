@@ -54,3 +54,32 @@ i[id=disable]:hover{
 id[id=enable]:hover{
   color: #58bc2e;
 }
+/********nz-modal************/
+.vertical-center-modal {
+  top:30%;
+  left:7.4%;
+}
+.ant-btn-primary {
+  background: #3cbcaf;
+  border:1px solid #3cbcaf;
+  color: #fff !important;
+}
+.ant-btn-primary:hover{
+   background: #35988e;
+   border:1px solid #35988e;
+ }
+.ant-btn{
+  border:1px solid #3cbcaf;
+  color: #3cbcaf;
+}
+.ant-btn:hover{
+  border:1px solid #35988e;
+  color: #35988e;
+}
+.ant-modal-close{
+  color: #3cbcaf;
+}
+.ant-modal-close:hover{
+  color: #35988e;
+}
+
