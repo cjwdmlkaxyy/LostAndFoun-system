@@ -14,6 +14,7 @@
   background-color: #2b343d;
   vertical-align:middle;
   color:#fff;
+  z-index: 9;
 
   ul>li{
     margin:0 10px;
@@ -24,9 +25,18 @@
   }
 }
 
-.test{
+.main{
+  display: flex;
   width:100%;
   height:100%;
-  background-color: #333;
+  padding-top:50px;
+}
+.slider{
+  width:16.666663%;
+  height:100%;
+}
+.main-container{
+  width:83.666667%;
+  height:100%;
 }
 

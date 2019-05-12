@@ -82,4 +82,14 @@ id[id=enable]:hover{
 .ant-modal-close:hover{
   color: #35988e;
 }
+.ant-btn-danger{
+  border:0 !important;
+  color: red;
+  //background: red !important;
+}
+.ant-btn-danger:hover{
+  //border:1px solid #ad0000;
+  //background: #ad0000;
+  color: #fff;
+}
 

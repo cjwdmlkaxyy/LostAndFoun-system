@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersManagementComponent } from './component/users-management/users-management.component';
@@ -19,6 +18,8 @@ import { SlideshowComponent } from './component/pictureManagement/slideshow/slid
 import { PagePictureComponent } from './component/pictureManagement/page-picture/page-picture.component';
 import { PublicSourceComponent } from './component/publicSource/prompts/public-source.component';
 import { LinkComponent } from "./component/linkManagement/link.component";
+import { NzDemoDatePickerStartEndComponent } from "./service/date-picker/nz-date-picker.common";
+import { CommonPageComponent } from "./service/command-page/common-page.component";
 
 /*directive*/
 import { WholePageListenDirective } from './directive/wholePageListen.directive';
@@ -27,6 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
+/*pipe*/
+import { ConversionValuePipe } from "./pipe/Conversion-value.pipe";
 
 registerLocaleData(zh);
 
@@ -46,7 +49,10 @@ registerLocaleData(zh);
     SlideshowComponent,
     PagePictureComponent,
     PublicSourceComponent,
-    LinkComponent
+    LinkComponent,
+    NzDemoDatePickerStartEndComponent,
+    CommonPageComponent,
+    ConversionValuePipe
   ],
   imports: [
     BrowserModule,

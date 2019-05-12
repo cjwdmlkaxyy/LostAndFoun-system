@@ -1,60 +1,135 @@
 <div class="main">
   <div class="header">
     <div class="row">
-      <span>当前位置:</span><span>后台管理系统</span>&gt;<span>拾物信息管理</span>
+      <span>当前位置:</span><span>后台管理系统</span>&gt;<span>失物信息管理</span>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div>
-        <!--<button class="btn btn-success" (click)="add()"><i nz-icon [type]="'plus'"></i>新增</button>-->
-        <button class="btn btn-danger"><i nz-icon [type]="'close'"></i>批量删除</button>
-        <button class="btn btn-warning" style="float: right;"><i nz-icon [type]="'search'"></i>查询</button>
+        <button class="btn btn-success" (click)="refresh()"><i nz-icon nzType="reload"></i>刷新</button>
+        <button class="btn btn-danger" (click)="deleteUser('')"><i nz-icon [type]="'close'"></i>批量删除</button>
+        <button class="btn btn-warning" style="float: right;"
+                (click)="openSearchLayer()"><i nz-icon [type]="'search'"></i>查询</button>
       </div>
     </div>
     <div class="table">
-      <nz-table [nzData]="listOfData" [nzShowPagination]="false">
+      <nz-table [nzData]="renderData" [nzShowPagination]="false">
         <thead>
         <tr>
           <th class="thBgColor"></th>
           <th class="thBgColor">序列</th>
-          <th class="thBgColor">登陆账号</th>
-          <th class="thBgColor">发布时间</th>
+          <th class="thBgColor">网名</th>
           <th class="thBgColor">物品类型</th>
+          <th class="thBgColor">发布时间</th>
           <th class="thBgColor">丢失地点</th>
-          <th class="thBgColor">联系电话</th>
           <th class="thBgColor">操作</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let data of listOfData,let idx = index">
+        <tr *ngFor="let item of renderData,let idx = index">
           <td>
-            <input type="checkbox"></td>
+            <input type="checkbox"
+                   [value]="item.id"></td>
           <td>{{idx+1}}</td>
           <td>
-            <!--<input type="text" [(ngModel)]="data.name">-->
-            <span>dddddd</span>
+            <span>{{item.netName}}</span>
           </td>
           <td>
-            <span>dddddddddd</span>
+            <span>{{item.typeOfGoods | conversionValue}}</span>
           <td>
-            <span>dddddddddd</span>
+            <span>{{item.createTime | date: 'yyyy-MM-dd hh:mm:ss'}}</span>
           </td>
+          <td>{{item.provinceName}}{{item.cityName}}{{item.districtName}}</td>
           <td>
-            <span>dddddddddd</span>
-          <td>
-            <span>dddddddddd</span>
-          </td>
-          <td>
-            <i id="edit" nz-icon type="eye" theme="outline" title="查看"></i>
-            <i id="delete" nz-icon type="close" theme="outline" title="删除" (click)="deleteItem(idx)"></i>
+            <i id="edit" nz-icon type="eye" theme="outline" title="查看" (click)="openDetailsLayer(item.id)"></i>
+            <i id="delete" nz-icon type="close" theme="outline" title="删除" (click)="deleteGoods(item.id)"></i>
           </td>
         </tr>
         </tbody>
       </nz-table>
+      <div nz-row style="float: right;padding-top: 40px;">
+        <app-common-page [pageSize]="pageConfig.pageSize" [totalNum]="pageConfig.totalNum"
+                         (currentIndex)="changeData($event, 'index')"
+                         (currentPageSize)="changeData($event, 'size')"
+                         [pageIndex]="pageConfig.pageNo"></app-common-page>
+      </div>
     </div>
   </div>
-  <div class="prompts" style="z-index:999;display: none;">
-    <app-public-source></app-public-source>
-  </div>
 </div>
+<!--搜素-->
+<nz-modal nzWidth="350"
+          [nzClassName]="'vertical-center-modal'"
+          nzTitle="查询"
+          [nzVisible]="searchLayer"
+          (nzOnOk)="confirmSearch()"
+          (nzOnCancel)="closeSearch()"
+          nzMaskClosable="false">
+  <form nz-form [formGroup]="searchForm">
+    <!--<nz-form-item>
+      <nz-form-label nzSpan="8">用户账号</nz-form-label>
+      <nz-form-control nzSpan="14">
+        <input formControlName="loginAccount" nz-input type="text" placeholder="请输入用户账号" />
+      </nz-form-control>
+    </nz-form-item>-->
+    <nz-form-item>
+      <nz-form-label nzSpan="8">物品种类</nz-form-label>
+      <nz-form-control nzSpan="14">
+        <nz-select formControlName="goodsType">
+          <nz-option *ngFor="let x of goodsTypeArr" [nzValue]="x.key" [nzLabel]="x.val"></nz-option>
+        </nz-select>
+      </nz-form-control>
+
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzSpan="10" style="margin-left: -23px;">开始时间</nz-form-label>
+      <nz-form-control nzSpan="14">
+        <nz-date-picker formControlName="startTime"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzSpan="10" style="margin-left: -23px;">结束时间</nz-form-label>
+      <nz-form-control nzSpan="14">
+        <nz-date-picker formControlName="endTime"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-modal>
+<!--查看goods信息-->
+<nz-modal nzTitle="用户信息" [nzVisible]="goodsDetailsLayer" [nzFooter]="null"
+          (nzOnCancel)="closeUserDetails()" nzMaskClosable="false">
+  <div nz-row *ngFor="let item of detailsList">
+    <div nz-row>
+      <div nz-col nzSpan="4">信息标题：</div>
+      <div nz-col nzSpan="8">{{item.infoTittle}}</div>
+      <div nz-col nzSpan="4" nzOffset="2">物品类型：</div>
+      <div nz-col nzSpan="6">{{item.typeOfGoods | conversionValue}}</div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="4">描述：</div>
+      <div nz-col nzSpan="18">{{item.description}}</div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="4">失物地点：</div>
+      <div nz-col nzSpan="12">{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.lostPlace}}</div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="4">图片：</div>
+      <div nz-col nzSpan="8">
+        <img [src]="item.picUrlEntityList[0].goodsUrl" style="width:200px;height:150px;">
+      </div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="4">联系人：</div>
+      <div nz-col nzSpan="6">{{item.concPersion}}</div>
+      <div nz-col nzSpan="4" nzOffset="4">联系电话：</div>
+      <div nz-col nzSpan="6">{{item.phoneNo}}</div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="4">联系地址：</div>
+      <div nz-col nzSpan="6">{{item.concPlace}}</div>
+      <!--<div nz-col nzSpan="4" nzOffset="4">联系电话：</div>
+      <div nz-col nzSpan="6">{{item.phoneNo}}</div>-->
+    </div>
+  </div>
+</nz-modal>

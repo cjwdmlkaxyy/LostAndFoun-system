@@ -31,8 +31,8 @@ export class HomeComponent implements OnInit {
     this.httpRequest.dashboard().subscribe((res: any) => {
       console.log(res);
       this.dashboardDate = {
-        todayActive: res.data.activeCountMonth,
-        monthActive: res.data.activeCountToday,
+        todayActive: res.data.activeCountToday,
+        monthActive: res.data.activeCountMonth,
         todayVisit: res.data.loginCountToday,
         monthVisit: res.data.loginCountMonth
       }
