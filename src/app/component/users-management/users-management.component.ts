@@ -60,11 +60,9 @@ export class UsersManagementComponent implements OnInit {
   }
 
   getData() {
-    console.log(this.searchCondition);
     this.httpRequest.getUsers(this.searchCondition).subscribe((res: any) => {
       if(!this.checkValAndStatus.checkRes(res.code)) {
         const data = JSON.parse(res.data.data);
-        console.log(res);
         this.renderData = data;
         this.pageConfig.totalNum = res.data.recordCount;
         this.pageConfig.pageNo = parseInt(res.data.currentPage);
@@ -105,7 +103,6 @@ export class UsersManagementComponent implements OnInit {
   }
 
   changeData(val: number, flag: string) {
-    console.log(val, flag);
     if (flag === 'index') {
       this.searchCondition.pageNo = val;
     } else {
@@ -115,7 +112,7 @@ export class UsersManagementComponent implements OnInit {
   }
 
   deleteUser(id) {
-    if(id) {
+    if(id !== '') {
       this.deleteArr.push(id);
     } else {
       const _this = this;
@@ -138,6 +135,7 @@ export class UsersManagementComponent implements OnInit {
         this.httpRequest.deleteUsers(this.deleteArr).subscribe((res: any) => {
           if(!this.checkValAndStatus.checkRes(res.code)) {
             this.getData();
+            this.checkValAndStatus.success();
             this.deleteArr = [];
           }
         }, (err: any) => {
@@ -147,7 +145,7 @@ export class UsersManagementComponent implements OnInit {
       },
       nzCancelText: '取消',
       nzOnCancel: () => {
-        console.log('no');
+        this.deleteArr = [];
       }
     })
   }

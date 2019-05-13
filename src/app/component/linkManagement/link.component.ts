@@ -20,17 +20,17 @@ export class LinkComponent implements OnInit {
               private nzModal: NzModalService) {}
 
   searchLayer = false;
-  userDetailsLayer = false;
   pageConfig: any;
   searchCondition: any;
   renderData = [];
   deleteArr = [];
+  addOrSearch = ''
 
   ngOnInit() {
     this.searchForm = this.fb.group({
-      loginAccount: [null],
-      createTime: [null],
-      loginTime: [null]
+      linkName: [null],
+      linkUrl: [null],
+      description: [null]
     });
     this.resetPageConfig();
     this.clearSearchCondition();
@@ -39,14 +39,13 @@ export class LinkComponent implements OnInit {
 
   clearSearchCondition() {
     // clear search form value
-    for (let controlsKey in this.searchForm.controls) {
+    /*for (let controlsKey in this.searchForm.controls) {
       this.searchForm.controls[controlsKey].setValue(null);
-    }
+    }*/
     this.searchCondition = {
-      id: null,
-      loginAccount: this.searchForm.value.loginAccount,
-      createTime: this.searchForm.value.createTime,
-      loginTime: this.searchForm.value.loginTime,
+      name: '',
+      url: '',
+      description: '',
       pageNo: this.pageConfig.pageNo,
       pageSize: this.pageConfig.pageSize
     }
@@ -60,8 +59,7 @@ export class LinkComponent implements OnInit {
   }
 
   getData() {
-    console.log(this.searchCondition);
-    this.httpRequest.getUsers(this.searchCondition).subscribe((res: any) => {
+    this.httpRequest.getLinks(this.searchCondition).subscribe((res: any) => {
       if(!this.checkValAndStatus.checkRes(res.code)) {
         const data = JSON.parse(res.data.data);
         console.log(res);
@@ -75,37 +73,30 @@ export class LinkComponent implements OnInit {
     });
   }
 
-  openSearchLayer(id: number) {
+  openSearchLayer(flag: string) {
+    if(flag === 'add') {
+      this.addOrSearch = '新增';
+    } else {
+      this.addOrSearch = '查询';
+    }
     this.clearSearchCondition();
-    this.searchCondition.id = id;
     this.searchLayer = true;
   }
 
-  confirmSearch() {
-    console.log(this.searchCondition);
-    this.searchCondition.loginAccount = this.searchForm.value.loginAccount;
-    this.searchCondition.createTime = this.searchForm.value.createTime;
-    this.searchCondition.loginTime = this.searchForm.value.loginTime;
-    this.searchLayer = false;
-    this.getData();
+  confirmSearchOrAdd() {
+    if(this.addOrSearch === '新增') {
+      this.addLink();
+    } else {
+      this.searchLayer = false;
+      this.getData();
+    }
   }
 
   closeSearch() {
     this.searchLayer = false;
   }
 
-  openUsersLayer(id: number) {
-    this.userDetailsLayer = true;
-    this.clearSearchCondition();
-    this.searchCondition.id = id;
-    this.getData();
-  }
-  closeUserDetails() {
-    this.userDetailsLayer = false;
-  }
-
   changeData(val: number, flag: string) {
-    console.log(val, flag);
     if (flag === 'index') {
       this.searchCondition.pageNo = val;
     } else {
@@ -114,8 +105,8 @@ export class LinkComponent implements OnInit {
     this.getData();
   }
 
-  deleteUser(id) {
-    if(id) {
+  deleteLink(id) {
+    if(id !== '') {
       this.deleteArr.push(id);
     } else {
       const _this = this;
@@ -135,9 +126,10 @@ export class LinkComponent implements OnInit {
       nzOkText: '确定',
       nzOkType: 'danger',
       nzOnOk: () => {
-        this.httpRequest.deleteUsers(this.deleteArr).subscribe((res: any) => {
+        this.httpRequest.deleteLink(this.deleteArr).subscribe((res: any) => {
           if(!this.checkValAndStatus.checkRes(res.code)) {
             this.getData();
+            this.checkValAndStatus.success();
             this.deleteArr = [];
           }
         }, (err: any) => {
@@ -148,7 +140,23 @@ export class LinkComponent implements OnInit {
       nzCancelText: '取消',
       nzOnCancel: () => {
         console.log('no');
+        $(':checkbox').each(function (i, e) {
+          $(e).prop('checked', false);
+        })
+        this.deleteArr = [];
       }
+    })
+  }
+  addLink() {
+    this.httpRequest.addLink(this.searchCondition).subscribe((res: any) => {
+      if (!this.checkValAndStatus.checkRes(res.code)) {
+        this.clearSearchCondition();
+        this.getData();
+        this.checkValAndStatus.success();
+        this.searchLayer = false;
+      }
+    }, (err: any) => {
+      this.checkValAndStatus.error();
     })
   }
 

@@ -134,7 +134,7 @@ export class FindSthComponent implements OnInit {
   }
 
   deleteGoods(id) {
-    if(id) {
+    if(id !== '') {
       this.deleteArr.push(id);
     } else {
       const _this = this;
@@ -157,6 +157,7 @@ export class FindSthComponent implements OnInit {
         this.httpRequest.deleteGoods(this.deleteArr).subscribe((res: any) => {
           if(!this.checkValAndStatus.checkRes(res.code)) {
             this.getData();
+            this.checkValAndStatus.success();
             this.deleteArr = [];
           }
         }, (err: any) => {
@@ -166,7 +167,7 @@ export class FindSthComponent implements OnInit {
       },
       nzCancelText: '取消',
       nzOnCancel: () => {
-        console.log('no');
+        this.deleteArr = [];
       }
     })
   }

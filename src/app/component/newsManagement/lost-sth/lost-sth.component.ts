@@ -134,7 +134,7 @@ export class LostSthComponent implements OnInit {
   }
 
   deleteGoods(id) {
-    if(id) {
+    if(id !== '') {
       this.deleteArr.push(id);
     } else {
       const _this = this;
@@ -157,6 +157,7 @@ export class LostSthComponent implements OnInit {
         this.httpRequest.deleteGoods(this.deleteArr).subscribe((res: any) => {
           if(!this.checkValAndStatus.checkRes(res.code)) {
             this.getData();
+            this.checkValAndStatus.success();
             this.deleteArr = [];
           }
         }, (err: any) => {
@@ -166,6 +167,7 @@ export class LostSthComponent implements OnInit {
       },
       nzCancelText: '取消',
       nzOnCancel: () => {
+        this.deleteArr = [];
         console.log('no');
       }
     })

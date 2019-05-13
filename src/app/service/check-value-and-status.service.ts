@@ -17,4 +17,8 @@ export class CheckValueAndStatusService {
   error() {
     this.nzMessage.error('服务器错误，请稍等');
   }
+
+  success() {
+    this.nzMessage.success('操作成功');
+  }
 }
