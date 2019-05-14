@@ -24,6 +24,9 @@
     margin:0 5px;
   }
 }
+.navbar-nav li:not([class=time]) {
+  cursor: pointer;
+}
 
 .main{
   display: flex;
@@ -38,5 +41,12 @@
 .main-container{
   width:83.666667%;
   height:100%;
+}
+
+.glyphicon-heart:hover{
+  color: #da3250;
+}
+.glyphicon-off:hover{
+  color: #0d61da;
 }
 
