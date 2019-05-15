@@ -61,3 +61,15 @@
   box-shadow: 0 0 3px #008ba7;
   //border:1px red solid;
 }
+.warning{
+  padding: 20px 100px;
+}
+.warning .tittle{
+  i{
+    color: red;
+  }
+  font-size: 30px;
+}
+.warning-text{
+  font-size: 25px;
+}
