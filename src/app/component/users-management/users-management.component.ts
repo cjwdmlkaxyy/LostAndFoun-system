@@ -25,6 +25,7 @@ export class UsersManagementComponent implements OnInit {
   searchCondition: any;
   renderData = [];
   deleteArr = [];
+  userDetails = [];
 
   ngOnInit() {
     this.searchForm = this.fb.group({
@@ -34,7 +35,7 @@ export class UsersManagementComponent implements OnInit {
     });
     this.resetPageConfig();
     this.clearSearchCondition();
-    this.getData();
+    this.getData('');
   }
 
   clearSearchCondition() {
@@ -59,13 +60,18 @@ export class UsersManagementComponent implements OnInit {
     }
   }
 
-  getData() {
+  getData(val) {
     this.httpRequest.getUsers(this.searchCondition).subscribe((res: any) => {
       if(!this.checkValAndStatus.checkRes(res.code)) {
         const data = JSON.parse(res.data.data);
-        this.renderData = data;
-        this.pageConfig.totalNum = res.data.recordCount;
-        this.pageConfig.pageNo = parseInt(res.data.currentPage);
+        if(val) {
+          this.userDetails = data;
+          console.log(this.userDetails);
+        } else {
+          this.renderData = data;
+          this.pageConfig.totalNum = res.data.recordCount;
+          this.pageConfig.pageNo = parseInt(res.data.currentPage);
+        }
       }
     }, (err: any) => {
       console.log(err);
@@ -80,23 +86,21 @@ export class UsersManagementComponent implements OnInit {
   }
 
   confirmSearch() {
-    console.log(this.searchCondition);
     this.searchCondition.loginAccount = this.searchForm.value.loginAccount;
     this.searchCondition.createTime = this.searchForm.value.createTime;
     this.searchCondition.loginTime = this.searchForm.value.loginTime;
     this.searchLayer = false;
-    this.getData();
+    this.getData('');
   }
 
   closeSearch() {
     this.searchLayer = false;
   }
 
-  openUsersLayer(id: number) {
+  openUsersLayer(name: string) {
     this.userDetailsLayer = true;
-    this.clearSearchCondition();
-    this.searchCondition.id = id;
-    this.getData();
+    this.searchCondition.loginAccount = name;
+    this.getData('userDetails');
   }
   closeUserDetails() {
     this.userDetailsLayer = false;
@@ -108,7 +112,7 @@ export class UsersManagementComponent implements OnInit {
     } else {
       this.searchCondition.pageSize = val;
     }
-    this.getData();
+    this.getData('');
   }
 
   deleteUser(id) {
@@ -134,7 +138,7 @@ export class UsersManagementComponent implements OnInit {
       nzOnOk: () => {
         this.httpRequest.deleteUsers(this.deleteArr).subscribe((res: any) => {
           if(!this.checkValAndStatus.checkRes(res.code)) {
-            this.getData();
+            this.getData('');
             this.checkValAndStatus.success();
             this.deleteArr = [];
           }
@@ -152,6 +156,6 @@ export class UsersManagementComponent implements OnInit {
 
   refresh() {
     this.clearSearchCondition();
-    this.getData();
+    this.getData('');
   }
 }
