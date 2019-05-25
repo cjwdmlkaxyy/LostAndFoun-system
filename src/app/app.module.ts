@@ -29,7 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 /*pipe*/
-import { ConversionValuePipe } from "./pipe/Conversion-value.pipe";
+import { ConversionValuePipe, GoodsStatus} from "./pipe/Conversion-value.pipe";
 
 registerLocaleData(zh);
 
@@ -52,7 +52,8 @@ registerLocaleData(zh);
     LinkComponent,
     NzDemoDatePickerStartEndComponent,
     CommonPageComponent,
-    ConversionValuePipe
+    ConversionValuePipe,
+    GoodsStatus
   ],
   imports: [
     BrowserModule,

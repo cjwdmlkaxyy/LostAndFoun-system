@@ -49,7 +49,7 @@ export class HttpRequestService{
   * delete user
   * */
   deleteUsers(data): Observable<any> {
-    return this.http.post(this.urlFront + '/user/delUser', {id: data});
+    return this.http.post(this.urlFront + '/user/delUser', data);
   }
   /*
   * get link

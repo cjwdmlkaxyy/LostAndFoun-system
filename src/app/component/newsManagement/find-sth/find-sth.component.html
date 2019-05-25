@@ -23,6 +23,7 @@
           <th class="thBgColor">物品类型</th>
           <th class="thBgColor">发布时间</th>
           <th class="thBgColor">丢失地点</th>
+          <th class="thBgColor">状态</th>
           <th class="thBgColor">操作</th>
         </tr>
         </thead>
@@ -41,6 +42,7 @@
             <span>{{item.createTime | date: 'yyyy-MM-dd :mm:ss'}}</span>
           </td>
           <td>{{item.provinceName}}{{item.cityName}}{{item.districtName}}</td>
+          <td>{{item.goodsStatus | GoodsStatus: 'found'}}</td>
           <td>
             <i id="edit" nz-icon type="eye" theme="outline" title="查看" (click)="openDetailsLayer(item.id)"></i>
             <i id="delete" nz-icon type="close" theme="outline" title="删除" (click)="deleteGoods(item.id)"></i>

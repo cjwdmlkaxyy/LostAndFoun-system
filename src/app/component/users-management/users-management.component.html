@@ -35,9 +35,9 @@
             <span>{{item.loginAccount}}</span>
           </td>
           <td>
-            <span>{{item.loginTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
-          <td>
             <span>{{item.createTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
+          <td>
+            <span>{{item.loginTime | date: 'yyyy-MM-dd HH:mm:ss'}}</span>
           </td>
           <td>
             <i id="edit" nz-icon type="eye" theme="outline" title="查看" (click)="openUsersLayer(item.loginAccount)"></i>
